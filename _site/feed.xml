@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Centrarium</title>
+    <title>Marc Cobos</title>
     <description>A simple yet classy theme for your Jekyll website or blog.
 </description>
-    <link>http://bencentra.github.io/centrarium/</link>
-    <atom:link href="http://bencentra.github.io/centrarium/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 28 Sep 2016 16:12:03 +0200</pubDate>
-    <lastBuildDate>Wed, 28 Sep 2016 16:12:03 +0200</lastBuildDate>
+    <link>http://coboshm.github.io/</link>
+    <atom:link href="http://coboshm.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 30 Sep 2016 08:55:05 +0200</pubDate>
+    <lastBuildDate>Fri, 30 Sep 2016 08:55:05 +0200</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -68,8 +68,8 @@ function demo(string, times) {
 
 </description>
         <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://bencentra.github.io/centrarium/jekyll/2015/04/18/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://bencentra.github.io/centrarium/jekyll/2015/04/18/welcome-to-jekyll.html</guid>
+        <link>http://coboshm.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://coboshm.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</guid>
         
         <category>jekyll</category>
         
@@ -92,116 +92,12 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy6.html</link>
-        <guid isPermaLink="true">http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy6.html</guid>
+        <link>http://coboshm.github.io/dummy/2015/04/18/dummy6.html</link>
+        <guid isPermaLink="true">http://coboshm.github.io/dummy/2015/04/18/dummy6.html</guid>
         
         <category>lorem</category>
         
         <category>ipsum</category>
-        
-        
-        <category>Dummy</category>
-        
-      </item>
-    
-      <item>
-        <title>Dummy Post 5</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy5.html</link>
-        <guid isPermaLink="true">http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy5.html</guid>
-        
-        <category>lorem</category>
-        
-        
-        <category>Dummy</category>
-        
-      </item>
-    
-      <item>
-        <title>Dummy Post 4</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy4.html</link>
-        <guid isPermaLink="true">http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy4.html</guid>
-        
-        <category>ipsum</category>
-        
-        
-        <category>Dummy</category>
-        
-      </item>
-    
-      <item>
-        <title>Dummy Post 3</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy3.html</link>
-        <guid isPermaLink="true">http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy3.html</guid>
-        
-        
-        <category>Dummy</category>
-        
-      </item>
-    
-      <item>
-        <title>Dummy Post 2</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy2.html</link>
-        <guid isPermaLink="true">http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy2.html</guid>
-        
-        
-        <category>Dummy</category>
-        
-      </item>
-    
-      <item>
-        <title>Dummy Post</title>
-        <description>&lt;p&gt;This is just a dummy post. Lorem ipsum and all the rest.&lt;/p&gt;
-
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy.html</link>
-        <guid isPermaLink="true">http://bencentra.github.io/centrarium/dummy/2015/04/18/dummy.html</guid>
         
         
         <category>Dummy</category>
