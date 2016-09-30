@@ -4,10 +4,10 @@
     <title>Marc Cobos</title>
     <description>A simple yet classy theme for your Jekyll website or blog.
 </description>
-    <link>http://coboshm.github.io/</link>
-    <atom:link href="http://coboshm.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 30 Sep 2016 08:55:05 +0200</pubDate>
-    <lastBuildDate>Fri, 30 Sep 2016 08:55:05 +0200</lastBuildDate>
+    <link>https://www.mcobos.com/</link>
+    <atom:link href="https://www.mcobos.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 30 Sep 2016 10:11:11 +0200</pubDate>
+    <lastBuildDate>Fri, 30 Sep 2016 10:11:11 +0200</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -68,8 +68,8 @@ function demo(string, times) {
 
 </description>
         <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://coboshm.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://coboshm.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</guid>
+        <link>https://www.mcobos.com/jekyll/2015/04/18/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">https://www.mcobos.com/jekyll/2015/04/18/welcome-to-jekyll.html</guid>
         
         <category>jekyll</category>
         
@@ -92,8 +92,8 @@ cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
 </description>
         <pubDate>Sat, 18 Apr 2015 10:43:59 +0200</pubDate>
-        <link>http://coboshm.github.io/dummy/2015/04/18/dummy6.html</link>
-        <guid isPermaLink="true">http://coboshm.github.io/dummy/2015/04/18/dummy6.html</guid>
+        <link>https://www.mcobos.com/dummy/2015/04/18/dummy6.html</link>
+        <guid isPermaLink="true">https://www.mcobos.com/dummy/2015/04/18/dummy6.html</guid>
         
         <category>lorem</category>
         
