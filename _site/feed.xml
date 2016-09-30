@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Marc Cobos</title>
-    <description>A simple yet classy theme for your Jekyll website or blog.
+    <description>Marc Cobos, Software Engineer, Sports and travel addict blog.
 </description>
     <link>https://www.mcobos.com/</link>
     <atom:link href="https://www.mcobos.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 30 Sep 2016 10:11:11 +0200</pubDate>
-    <lastBuildDate>Fri, 30 Sep 2016 10:11:11 +0200</lastBuildDate>
+    <pubDate>Fri, 30 Sep 2016 10:27:33 +0200</pubDate>
+    <lastBuildDate>Fri, 30 Sep 2016 10:27:33 +0200</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>

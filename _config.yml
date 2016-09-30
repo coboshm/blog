@@ -14,7 +14,7 @@ subtitle: "Software Engineer, Sports and Travel addict"
 email: coboshernandez@gmail.com
 name: Marc Cobos
 description: >
-  A simple yet classy theme for your Jekyll website or blog.
+  Marc Cobos, Software Engineer, Sports and travel addict blog.
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -107,3 +107,7 @@ protocols:
     fb_image_type: "image/png"
 
     twitter_image: "/assets/logo.png"
+
+    os_repo: "https://github.com/coboshm/coboshm.github.io.git"
+    os_rcs_type: "git"
+    os_src: "git@github.com:coboshm/coboshm.github.io.git"
