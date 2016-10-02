@@ -20,12 +20,6 @@ I’m currently having fun at <a href="trovit.com" target="_blank">Trovit</a> as
 
 I always wonder why things work the way they do, why we keep doing them the same way over and over instead of push them to the next level. I'm a Software Engineer focused in developing applications with PHP, NodeJS, Java, Ajax, JQuery, CSS, Mysql, Python, MongoDB and others...
 
-My esencial tech books (must-read books):<br/>
-- <a href="https://www.amazon.es/gp/product/0596007124" target="_blank">Head First Design Patterns</a><br/>
-- <a href="https://www.amazon.es/Refactoring-Improving-Design-Existing-Technology/dp/0201485672" target="_blank">Refactoring:Improving the Design of Existing Code</a><br/>
-- <a href="https://leanpub.com/ddd-in-php" target="_blank">Domain-Driven Design in PHP</a><br/>
-- <a href="https://www.amazon.es/Implementing-Domain-Driven-Design-Vernon-Vaughn/dp/0321834577" target="_blank">Implementing Domain-Driven Design</a><br/>
-
 Also experience with:
 <br/>
 - DDD Domain Driven Design, Design Patterns
@@ -63,5 +57,13 @@ Also you can see my github: <a href="http://github.com/coboshm" target="_blank">
 
 <img src="{{ site.baseurl }}/assets/zend_certified.jpg" title="Zend Certified" class="image_certified">
 
-I just love my job
+And currently learning Ruby on rails.
+
+I just love my job.
+
+Also i love the sea, the island of Menorca and my home city Barcelona.
+<a href="{{ site.baseurl }}/assets/velero.jpg" data-lightbox="Marc Cobos Sailboat" data-title="One of the thinks that i love">
+  <img src="{{ site.baseurl }}/assets/velero.jpg" class="rounded_big" title="Sailbot">
+</a>
+
 

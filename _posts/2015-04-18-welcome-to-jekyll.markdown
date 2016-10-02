@@ -7,6 +7,8 @@ categories: Jekyll
 tags:	jekyll welcome
 cover:  "/assets/instacode.png"
 ---
+<!--This is my personal blog where I'm going to share all my stuff. I did this blog using jekyll [Jekyll docs][jekyll].
+This Blog is a -->
 
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 

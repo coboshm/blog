@@ -90,7 +90,7 @@ pre code.hljs {
 			background-color: rgba(0,0,0,0.2);
 			padding: 6em 1em !important;
 			@include media($tablet) {
-				padding: 2em 1em !important;
+				padding: 0.2em 1em !important;
 			}
 		}
 	}
@@ -372,6 +372,13 @@ pre code.hljs {
 		.profile {
 			border-radius: 50%;
 			max-width: 140px;
+			margin: auto;
+			padding-bottom: 0.5em;
+ 		}
+		.rounded_big {
+			padding-top: 1.2em;
+			border-radius: 2%;
+			max-width: 400px;
 			margin: auto;
 			padding-bottom: 0.5em;
  		}
