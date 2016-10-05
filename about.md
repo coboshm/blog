@@ -20,8 +20,7 @@ I’m currently having fun at <a href="trovit.com" target="_blank">Trovit</a> as
 
 I always wonder why things work the way they do, why we keep doing them the same way over and over instead of push them to the next level. I'm a Software Engineer focused in developing applications with PHP, NodeJS, Java, Ajax, JQuery, CSS, Mysql, Python, MongoDB and others...
 
-Also experience with:
-<br/>
+### Also experience with:
 - DDD Domain Driven Design, Design Patterns
 <br/>
 - PHP Frameworks: Symfony, Silex, Zend
@@ -59,7 +58,7 @@ Also you can see my github: <a href="http://github.com/coboshm" target="_blank">
 
 And currently learning Ruby on rails.
 
-I just love my job.
+### I just love my job.
 
 Also i love the sea, the island of Menorca and my home city Barcelona.
 <a href="{{ site.baseurl }}/assets/velero.jpg" data-lightbox="Marc Cobos Sailboat" data-title="One of the thinks that i love">
