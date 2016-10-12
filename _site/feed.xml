@@ -6,9 +6,63 @@
 </description>
     <link>https://www.mcobos.com/</link>
     <atom:link href="https://www.mcobos.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 05 Oct 2016 14:49:30 +0200</pubDate>
-    <lastBuildDate>Wed, 05 Oct 2016 14:49:30 +0200</lastBuildDate>
+    <pubDate>Wed, 12 Oct 2016 16:24:28 +0200</pubDate>
+    <lastBuildDate>Wed, 12 Oct 2016 16:24:28 +0200</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Bulgaria PHP Conference 2016</title>
+        <description>&lt;h3 id=&quot;bulgaria-php-conference-was-great&quot;&gt;Bulgaria PHP Conference was great&lt;/h3&gt;
+
+&lt;p&gt;The weekend of 7 - 9 october some Troviters attend the &lt;a href=&quot;www.bgphp.org&quot;&gt;Bulgaria PHP Conference&lt;/a&gt;. Now I can say that I have new favorite php conference in Europe. Everything was amazing, great talks, great speakers and a lot of ideas and new thinks that I want to try in my projects.&lt;/p&gt;
+
+&lt;p&gt;We stay in the legends hotel which is near Sofia Events Center. At the Hotel we met &lt;a href=&quot;https://getcomposer.org&quot;&gt;Composer’s&lt;/a&gt; creator and some of the Speakers.&lt;/p&gt;
+
+&lt;p&gt;The first day at the hall of the hotel we met &lt;a href=&quot;https://twitter.com/DragonBe&quot;&gt;Michelangelo van Dam&lt;/a&gt; he is a Senior PHP Architect and leader at &lt;a href=&quot;https://www.phpbenelux.eu&quot;&gt;PHP Benelux&lt;/a&gt;. He was preparing his talk and we had some problem. We tried to help him.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/bgphp_hall.jpg&quot; data-lightbox=&quot;Troviters with Michelangelo Van Dam&quot; data-title=&quot;Troviters with Michelangelo Van Dam&quot;&gt;
+  &lt;img style=&quot;width: 320px; margin:auto;&quot; src=&quot;/assets/bgphp_hall.jpg&quot; class=&quot;rounded_big&quot; title=&quot;Sailbot&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The talk was about run your unit test using docker and parallise to make them faster. &lt;a href=&quot;http://www.slideshare.net/DragonBe/dockerize-your-unit-tests-for-faster-feedback&quot;&gt;(slides)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In the talk he explain, that we can run the test faster running each phpunit group in parallel using gnu parallels and docker.&lt;/p&gt;
+
+&lt;p&gt;Here are some steps to figure out.&lt;/p&gt;
+
+&lt;p&gt;Get all the phpunit groups:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;i &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;./vendor/bin/phpunit -c build/phpunit.xml --list-groups | grep &lt;span class=&quot;s2&quot;&gt;&quot;^ -&quot;&lt;/span&gt; | 
+awk &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'print $2'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; ./vendor/bin/phpunit -c build/phpunit.xml --group &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Run all the unit test using docker:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;docker run -ti --rm -v &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PWD&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;:/Users/mcobos/ProjectName
+-w /Users/mcobos/ProjectName php /Users/mcobos/ProjectNamevendor/bin/phpunit 
+-c /Users/mcobos/ProjectName/build/phpunit.xml &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Run all unit test groups using parallel and docker&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;i &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;./vendor/bin/phpunit -c build/phpunit.xml --list-groups | grep &lt;span class=&quot;s2&quot;&gt;&quot;^ -&quot;&lt;/span&gt;
+| awk &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'print $2'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; /usr/local/bin/parallel 
+docker run -d -v &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PWD&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;:/Users/mcobos/ProjectName -w /Users/mcobos/ProjectName 
+php /Users/mcobos/ProjectName/vendor/bin/phpunit -c /Users/mcobos/ProjectName/build/phpunit.xml --group &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;It works if you have more than 5K tests and the tests are classified by groups. If you have less than 5k tests the docker overhead is going to give you a worse results than running the test normally.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 12 Oct 2016 12:43:59 +0200</pubDate>
+        <link>https://www.mcobos.com/php/2016/10/12/bgphp16.html</link>
+        <guid isPermaLink="true">https://www.mcobos.com/php/2016/10/12/bgphp16.html</guid>
+        
+        <category>php</category>
+        
+        <category>welcome</category>
+        
+        
+        <category>PHP</category>
+        
+      </item>
     
       <item>
         <title>Welcome to my blog done with Jekyll</title>
@@ -28,8 +82,8 @@
 
 </description>
         <pubDate>Wed, 05 Oct 2016 10:43:59 +0200</pubDate>
-        <link>https://www.mcobos.com/jekyll/2016/10/05/welcome-to-my-blog-done-using-jekyll.html</link>
-        <guid isPermaLink="true">https://www.mcobos.com/jekyll/2016/10/05/welcome-to-my-blog-done-using-jekyll.html</guid>
+        <link>https://www.mcobos.com/jekyll/2016/10/05/welcome-to-my-blog-done-using-jekyll-copy.html</link>
+        <guid isPermaLink="true">https://www.mcobos.com/jekyll/2016/10/05/welcome-to-my-blog-done-using-jekyll-copy.html</guid>
         
         <category>jekyll</category>
         

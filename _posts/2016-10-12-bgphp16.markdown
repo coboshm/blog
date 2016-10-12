@@ -1,0 +1,56 @@
+---
+layout: post
+title:  "Bulgaria PHP Conference 2016"
+date:   2016-10-12 10:43:59
+author: Marc Cobos
+categories: PHP
+tags:	php welcome
+cover:  "/assets/bg_header.jpg"
+---
+
+### Bulgaria PHP Conference was great
+
+The weekend of 7 - 9 october some Troviters attend the [Bulgaria PHP Conference][bgphp]. Now I can say that I have new favorite php conference in Europe. Everything was amazing, great talks, great speakers and a lot of ideas and new thinks that I want to try in my projects.
+
+We stay in the legends hotel which is near Sofia Events Center. At the Hotel we met [Composer's][composer] creator and some of the Speakers.
+
+The first day at the hall of the hotel we met [Michelangelo van Dam][michelangelo] he is a Senior PHP Architect and leader at [PHP Benelux][benelux]. He was preparing his talk and we had some problem. We tried to help him.
+
+<a href="{{ site.baseurl }}/assets/bgphp_hall.jpg" data-lightbox="Troviters with Michelangelo Van Dam" data-title="Troviters with Michelangelo Van Dam">
+  <img style="width: 320px; margin:auto;" src="{{ site.baseurl }}/assets/bgphp_hall.jpg" class="rounded_big" title="Sailbot">
+</a>
+
+The talk was about run your unit test using docker and parallise to make them faster. [(slides)][michelangelo_talk] 
+
+In the talk he explain, that we can run the test faster running each phpunit group in parallel using gnu parallels and docker.
+
+Here are some steps to figure out. 
+
+Get all the phpunit groups:
+{% highlight bash %}
+for i in `./vendor/bin/phpunit -c build/phpunit.xml --list-groups | grep "^ -" | 
+awk {'print $2'}`; do ./vendor/bin/phpunit -c build/phpunit.xml --group $i; done
+{% endhighlight %}
+
+Run all the unit test using docker:
+{% highlight bash %}
+docker run -ti --rm -v "$PWD":/Users/mcobos/ProjectName
+-w /Users/mcobos/ProjectName php /Users/mcobos/ProjectNamevendor/bin/phpunit 
+-c /Users/mcobos/ProjectName/build/phpunit.xml 
+{% endhighlight %}
+
+Run all unit test groups using parallel and docker
+{% highlight bash %}
+for i in `./vendor/bin/phpunit -c build/phpunit.xml --list-groups | grep "^ -"
+| awk {'print $2'}`; do echo $i; done | time /usr/local/bin/parallel 
+docker run -d -v "$PWD":/Users/mcobos/ProjectName -w /Users/mcobos/ProjectName 
+php /Users/mcobos/ProjectName/vendor/bin/phpunit -c /Users/mcobos/ProjectName/build/phpunit.xml --group {}
+{% endhighlight %}
+
+It works if you have more than 5K tests and the tests are classified by groups. If you have less than 5k tests the docker overhead is going to give you a worse results than running the test normally.
+
+[bgphp]:   www.bgphp.org
+[composer]: https://getcomposer.org
+[michelangelo]: https://twitter.com/DragonBe
+[benelux]: https://www.phpbenelux.eu
+[michelangelo_talk]: http://www.slideshare.net/DragonBe/dockerize-your-unit-tests-for-faster-feedback
