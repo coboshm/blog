@@ -6,6 +6,7 @@ author: Marc Cobos
 categories: Jekyll
 tags:	jekyll welcome
 cover:  "/assets/instacode.png"
+thumbnail: "/assets/instacode.png"
 ---
 
 Always i wanted to have my own blog to explain all kind of things. But never i had the time to make it real. Some years ago when i was doing an intership at [InLab][inLab] i did some static (but awesome) page using [jekyll][jekyll] and today i decided to start my blog using Jekyll.

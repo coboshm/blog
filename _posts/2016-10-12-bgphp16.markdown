@@ -6,6 +6,7 @@ author: Marc Cobos
 categories: PHP
 tags:	php welcome
 cover:  "/assets/bg_header.jpg"
+thumbnail: "/assets/bg_header.jpg"
 ---
 
 ### Bulgaria PHP Conference was great

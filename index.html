@@ -19,6 +19,12 @@ layout: default
     <h2>
       <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
     </h2>
+    {% if post.thumbnail %}
+      <div style="width:250px; float:left;">
+        <img src="{{ site.baseurl }}{{post.thumbnail}}"
+        alt="{{post.title}}"  style="margin-right:10px;" />
+      </div>
+    {% endif %}
     <section class="post-excerpt" itemprop="description">
       <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
     </section>
