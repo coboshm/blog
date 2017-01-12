@@ -342,6 +342,13 @@ pre code.hljs {
 				text-align: right;
 			}
 		}
+		.rounded_medium {
+			padding-top: 1.2em;
+			border-radius: 3em;
+			max-width: 450px;
+			margin: auto;
+			padding-bottom: 0.5em;
+ 		}
 	}
 	/*
 	*	Pages
@@ -383,6 +390,7 @@ pre code.hljs {
 			margin: auto;
 			padding-bottom: 0.5em;
  		}
+ 	
 	}
 }
 
