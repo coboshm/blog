@@ -11,17 +11,17 @@ thumbnail: "/assets/bg_header.jpg"
 
 ### Bulgaria PHP Conference was great
 
-The weekend of 7 - 9 october some Troviters attend the [Bulgaria PHP Conference][bgphp]. Now I can say that I have new favorite php conference in Europe. Everything was amazing, great talks, great speakers and a lot of ideas and new thinks that I want to try in my projects.
+The weekend of 7 - 9 october some Troviters attend the [Bulgaria PHP Conference][bgphp]. Now I can say that I have new favorite php conference in Europe. Everything was amazing, great talks, great speakers and a lot of ideas and new things that I want to try in my projects.
 
 We stay in the legends hotel which is near Sofia Events Center. At the Hotel we met [Composer's][composer] creator and some of the Speakers.
 
-The first day at the hall of the hotel we met [Michelangelo van Dam][michelangelo] he is a Senior PHP Architect and leader at [PHP Benelux][benelux]. He was preparing his talk and we had some problem. We tried to help him.
+The first day at the hall of the hotel we met [Michelangelo van Dam][michelangelo] he is a Senior PHP Architect and leader at [PHP Benelux][benelux]. 
 
 <a href="{{ site.baseurl }}/assets/bgphp_hall.jpg" data-lightbox="Troviters with Michelangelo Van Dam" data-title="Troviters with Michelangelo Van Dam">
   <img style="width: 320px; margin:auto;" src="{{ site.baseurl }}/assets/bgphp_hall.jpg" class="rounded_big" title="Sailbot">
 </a>
 
-The talk was about run your unit test using docker and parallise to make them faster. [(slides)][michelangelo_talk] 
+The talk was about run your unit test using docker and parallelise to make them faster. [(slides)][michelangelo_talk] 
 
 In the talk he explain, that we can run the test faster running each phpunit group in parallel using gnu parallels and docker.
 
