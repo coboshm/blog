@@ -6,25 +6,177 @@
 </description>
     <link>https://www.mcobos.com/</link>
     <atom:link href="https://www.mcobos.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 18 Oct 2016 17:21:04 +0200</pubDate>
-    <lastBuildDate>Tue, 18 Oct 2016 17:21:04 +0200</lastBuildDate>
-    <generator>Jekyll v3.2.1</generator>
+    <pubDate>Sat, 19 Aug 2017 17:21:57 +0200</pubDate>
+    <lastBuildDate>Sat, 19 Aug 2017 17:21:57 +0200</lastBuildDate>
+    <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>Logging our golang app using rsyslog + logstash + kibana</title>
+        <description>&lt;p&gt;Nowadays Elasticsearch is one of the best solutions for our logs. Here you have a configuration used in one of my projects. There is a logstash configuration + rsyslog config + logging in our golang app.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/logstash-elastic.png&quot; data-lightbox=&quot;Elasticsearch + logstash + kibana&quot; data-title=&quot;Elasticsearch + logstash + kibana&quot;&gt;
+  &lt;img style=&quot;width: 100%; margin:auto;&quot; src=&quot;/assets/logstash-elastic.png&quot; class=&quot;rounded_big&quot; title=&quot;Sailbot&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Repo with all the code: &lt;a href=&quot;https://github.com/coboshm/go-logger-syslog&quot;&gt;Github repo with examples&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;logging-in-our-golang-application&quot;&gt;Logging in our golang application&lt;/h2&gt;
+&lt;h4 id=&quot;creating-our-logger&quot;&gt;Creating our logger&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;log, err := logger.NewLoggerFromDSN(loggerDSN, appName, *env)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The DSN (defined in our &lt;code class=&quot;highlighter-rouge&quot;&gt;config.toml&lt;/code&gt;) should looks like:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dsn = &quot;kibana://?level=debug&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Schema could be:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;kibana &lt;code class=&quot;highlighter-rouge&quot;&gt;kibana://?level=debug&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;stdout &lt;code class=&quot;highlighter-rouge&quot;&gt;stdout://?level=info&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;discardall &lt;code class=&quot;highlighter-rouge&quot;&gt;discardall://?level=debug&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Level parameter could be &lt;code class=&quot;highlighter-rouge&quot;&gt;debug&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;info&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;using-our-logger&quot;&gt;Using our logger&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;log.Info(&quot;Running...&quot;, logger.NewField(&quot;newField1&quot;, &quot;value1&quot;), logger.NewField(&quot;newField2&quot;, 2))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;log.Debug(&quot;Debugging Running...&quot;, logger.NewField(&quot;newField1&quot;, &quot;value1&quot;), logger.NewField(&quot;newField2&quot;, 2))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;instaling-rsyslog-and-logstash-in-for-red-hat-based-systems&quot;&gt;Instaling rsyslog and logstash in (for Red Hat-based systems)&lt;/h2&gt;
+&lt;h4 id=&quot;configure-rsyslog-etcrsyslogconf&quot;&gt;Configure Rsyslog &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/rsyslog.conf&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Active mmjsonparse it will be used to parse all the `@cee json messages&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module(load=&quot;mmjsonparse&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Create rulset that uses &lt;code class=&quot;highlighter-rouge&quot;&gt;mmjsonparse&lt;/code&gt; to parse the `@cee messages and do action to forward to logstash udp port the json message&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ruleset(name=&quot;remoteAllJsonLog&quot;) {
+    action(type=&quot;mmjsonparse&quot;)
+    if $parsesuccess == &quot;OK&quot; then {
+        action(
+            type=&quot;omfwd&quot;
+            Target=&quot;localhost&quot;
+            Port=&quot;5514&quot;
+            Protocol=&quot;udp&quot;
+            template=&quot;allJsonLogTemplate&quot;
+        )
+    }
+    stop
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Define a template to get all json fields of the message&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;template(name=&quot;allJsonLogTemplate&quot; type=&quot;list&quot;) {
+    property(name=&quot;$!all-json&quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Get all the logs using this udp port and use the ruleset &lt;code class=&quot;highlighter-rouge&quot;&gt;remoteAllJsonLog&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module(load=&quot;imudp&quot;) # needs to be done just once
+input(type=&quot;imudp&quot; port=&quot;514&quot; ruleset=&quot;remoteAllJsonLog&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;configure-logstash-etclogstashconfigdlogstashconf&quot;&gt;Configure logstash &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/logstash/config.d/logstash.conf&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;Input get messages from port 5514 UDP&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;input {
+  udp {
+      port =&amp;gt; 5514
+      codec =&amp;gt; json
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Output send messages to elasticsearch&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;output {
+    elasticsearch {
+        hosts =&amp;gt; &quot;[ELASTICSEARCH_HOST]&quot;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Sat, 19 Aug 2017 10:43:59 +0200</pubDate>
+        <link>https://www.mcobos.com/golang/2017/08/19/rsyslog-logstash-kibana-golang.html</link>
+        <guid isPermaLink="true">https://www.mcobos.com/golang/2017/08/19/rsyslog-logstash-kibana-golang.html</guid>
+        
+        <category>golang</category>
+        
+        <category>rsyslog</category>
+        
+        <category>logstash</category>
+        
+        
+        <category>Golang</category>
+        
+      </item>
+    
+      <item>
+        <title>Bye Trovit, It has been great</title>
+        <description>&lt;h2 id=&quot;it-has-been-a-pleasure-to-be-part-of-the-trovit-team&quot;&gt;It has been a pleasure to be part of the Trovit team&lt;/h2&gt;
+
+&lt;p&gt;After almost 2 years at Trovit the day to change has arrived and i’m going to start a new challenge. Today I’m sure that two years ago I made the best decision I could take by joining Trovit. I have been working with great professionals and I have been able to learn from them. 
+From here I take many great moments, a lot of learning and many friends. I am sure that in the future we will meet again.&lt;/p&gt;
+
+&lt;p&gt;Today I remember hundreds of moments. I’m remembering my first deploy just my second day at Trovit. My first AfterTrovit, the travel to Japan or the number of times that i had to go to Systems guys to talk about the beanstalks status.&lt;/p&gt;
+
+&lt;p&gt;Only I can say that I wish you all the best!&lt;/p&gt;
+
+&lt;h4 id=&quot;if-trovit-its-cool-why-this-change&quot;&gt;If Trovit it’s cool, why this change?&lt;/h4&gt;
+&lt;p&gt;Sometimes there are opportunities that only pass once and this one I couldn’t let pass. This challenge brings me four important things that made me decide to accept it.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GoLang
+&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;Project from scratch (or almost)
+&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;High volume of data
+&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;The team that I’m joining&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/japan_trovit.jpg&quot; data-lightbox=&quot;Trovit Team in Japan&quot; data-title=&quot;Trovit Team attending the annual NextCo Conference in Japan&quot;&gt;
+  &lt;img src=&quot;/assets/japan_trovit.jpg&quot; class=&quot;rounded_medium&quot; title=&quot;Trovit Team in Japan&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 12 Jan 2017 01:00:00 +0100</pubDate>
+        <link>https://www.mcobos.com/general/2017/01/12/bye-trovit.html</link>
+        <guid isPermaLink="true">https://www.mcobos.com/general/2017/01/12/bye-trovit.html</guid>
+        
+        <category>trovit</category>
+        
+        
+        <category>General</category>
+        
+      </item>
     
       <item>
         <title>Bulgaria PHP Conference 2016</title>
         <description>&lt;h3 id=&quot;bulgaria-php-conference-was-great&quot;&gt;Bulgaria PHP Conference was great&lt;/h3&gt;
 
-&lt;p&gt;The weekend of 7 - 9 october some Troviters attend the &lt;a href=&quot;www.bgphp.org&quot;&gt;Bulgaria PHP Conference&lt;/a&gt;. Now I can say that I have new favorite php conference in Europe. Everything was amazing, great talks, great speakers and a lot of ideas and new thinks that I want to try in my projects.&lt;/p&gt;
+&lt;p&gt;The weekend of 7 - 9 october some Troviters attend the &lt;a href=&quot;www.bgphp.org&quot;&gt;Bulgaria PHP Conference&lt;/a&gt;. Now I can say that I have new favorite php conference in Europe. Everything was amazing, great talks, great speakers and a lot of ideas and new things that I want to try in my projects.&lt;/p&gt;
 
 &lt;p&gt;We stay in the legends hotel which is near Sofia Events Center. At the Hotel we met &lt;a href=&quot;https://getcomposer.org&quot;&gt;Composer’s&lt;/a&gt; creator and some of the Speakers.&lt;/p&gt;
 
-&lt;p&gt;The first day at the hall of the hotel we met &lt;a href=&quot;https://twitter.com/DragonBe&quot;&gt;Michelangelo van Dam&lt;/a&gt; he is a Senior PHP Architect and leader at &lt;a href=&quot;https://www.phpbenelux.eu&quot;&gt;PHP Benelux&lt;/a&gt;. He was preparing his talk and we had some problem. We tried to help him.&lt;/p&gt;
+&lt;p&gt;The first day at the hall of the hotel we met &lt;a href=&quot;https://twitter.com/DragonBe&quot;&gt;Michelangelo van Dam&lt;/a&gt; he is a Senior PHP Architect and leader at &lt;a href=&quot;https://www.phpbenelux.eu&quot;&gt;PHP Benelux&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/assets/bgphp_hall.jpg&quot; data-lightbox=&quot;Troviters with Michelangelo Van Dam&quot; data-title=&quot;Troviters with Michelangelo Van Dam&quot;&gt;
   &lt;img style=&quot;width: 320px; margin:auto;&quot; src=&quot;/assets/bgphp_hall.jpg&quot; class=&quot;rounded_big&quot; title=&quot;Sailbot&quot; /&gt;
 &lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;The talk was about run your unit test using docker and parallise to make them faster. &lt;a href=&quot;http://www.slideshare.net/DragonBe/dockerize-your-unit-tests-for-faster-feedback&quot;&gt;(slides)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The talk was about run your unit test using docker and parallelise to make them faster. &lt;a href=&quot;http://www.slideshare.net/DragonBe/dockerize-your-unit-tests-for-faster-feedback&quot;&gt;(slides)&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;In the talk he explain, that we can run the test faster running each phpunit group in parallel using gnu parallels and docker.&lt;/p&gt;
 
