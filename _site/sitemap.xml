@@ -17,6 +17,10 @@
 <lastmod>2017-08-19T10:43:59+02:00</lastmod>
 </url>
 <url>
+<loc>https://www.mcobos.com/golang/2017/08/26/kinesis-golang-redshift.html</loc>
+<lastmod>2017-08-26T10:43:59+02:00</lastmod>
+</url>
+<url>
 <loc>https://www.mcobos.com/about/</loc>
 </url>
 <url>
@@ -45,6 +49,15 @@
 </url>
 <url>
 <loc>https://www.mcobos.com/tag/logstash/</loc>
+</url>
+<url>
+<loc>https://www.mcobos.com/tag/kinesis/</loc>
+</url>
+<url>
+<loc>https://www.mcobos.com/tag/redshift/</loc>
+</url>
+<url>
+<loc>https://www.mcobos.com/tag/aws/</loc>
 </url>
 <url>
 <loc>https://www.mcobos.com/category/jekyll/</loc>

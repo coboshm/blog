@@ -6,9 +6,189 @@
 </description>
     <link>https://www.mcobos.com/</link>
     <atom:link href="https://www.mcobos.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Aug 2017 17:21:57 +0200</pubDate>
-    <lastBuildDate>Sat, 19 Aug 2017 17:21:57 +0200</lastBuildDate>
+    <pubDate>Sat, 26 Aug 2017 18:49:13 +0200</pubDate>
+    <lastBuildDate>Sat, 26 Aug 2017 18:49:13 +0200</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>Tracking system using Golang + Kinesis + Redshift</title>
+        <description>&lt;p&gt;Track how the user uses our app is one of the basic things that all company should do.
+It’s possible to track everything you can imagine.&lt;/p&gt;
+
+&lt;p&gt;Some examples:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;App has been started&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;User change to page 2&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Searcher has been used&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Change of password&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;…&lt;/p&gt;
+
+&lt;p&gt;Data driven Companies uses this data to improve their products and launch new features.&lt;/p&gt;
+
+&lt;h3 id=&quot;tracking-our-app-using-kinesis--redshift--golang&quot;&gt;Tracking our app using Kinesis + Redshift + Golang&lt;/h3&gt;
+&lt;p&gt;Kinesis with one stream (or more if you want) + Golang to put data into the stream and consume this data and store to redshift.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/kinesis.png&quot; data-lightbox=&quot;Kinesis&quot; data-title=&quot;Kinesis&quot;&gt;
+  &lt;img style=&quot;width: 100%; margin:auto;&quot; src=&quot;/assets/kinesis.png&quot; class=&quot;rounded_big&quot; title=&quot;Kinesis&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;golang-code-to-put-events-in-the-kinesis-stream&quot;&gt;Golang code to put events in the Kinesis stream&lt;/h5&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sess := session.Must(session.NewSession())
+
+// Create a Firehose client with additional configuration
+firehoseService := firehose.New(sess, aws.NewConfig().WithRegion(&quot;us-east-1&quot;))
+
+recordsBatchInput := &amp;amp;firehose.PutRecordBatchInput{}
+recordsBatchInput = recordsBatchInput.SetDeliveryStreamName(streamName)
+
+records := []*firehose.Record{}
+
+for i := 0; i &amp;lt; 10; i++ {
+  data := FakeEntity{
+    ID:          rand.Intn(maxUint),
+    Name:        fmt.Sprintf(&quot;Name %d&quot;, rand.Intn(maxUint)),
+    Description: fmt.Sprintf(&quot;Test %d&quot;, rand.Intn(maxUint)),
+  }
+
+  b, _ := json.Marshal(data)
+
+  record := &amp;amp;firehose.Record{Data: b}
+  records = append(records, record)
+}
+
+recordsBatchInput = recordsBatchInput.SetRecords(records)
+
+resp, err := firehoseService.PutRecordBatch(recordsBatchInput)
+if err != nil {
+  fmt.Printf(&quot;PutRecordBatch err: %v\n&quot;, err)
+} else {
+  fmt.Printf(&quot;PutRecordBatch: %v\n&quot;, resp)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h5 id=&quot;golang-kinesis-consumer-that-stores-data-to-redshift&quot;&gt;Golang kinesis consumer that stores data to redshift&lt;/h5&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;describeStreamOutput, err := kinesisService.DescribeStream(&amp;amp;kinesis.DescribeStreamInput{StreamName: &amp;amp;streamName})
+if err != nil {
+    fmt.Printf(&quot;DescribeStream err: %v\n&quot;, err)
+    os.Exit(1)
+}
+
+wg := sync.WaitGroup{}
+
+for _, shard := range describeStreamOutput.StreamDescription.Shards {
+    wg.Add(1)
+    go getRecordsFromShard(kinesisService, &amp;amp;streamName, shard, &amp;amp;wg, redshift)
+}
+
+wg.Wait()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Each goroutine executes the following function to read from the shard and store the events in Redshift.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func getRecordsFromShard(kinesisService *kinesis.Kinesis, streamName *string, shard *kinesis.Shard, wg *sync.WaitGroup, redshift *sql.DB) {
+    defer wg.Done()
+
+    shardIteratorTypeTimestamp := kinesis.ShardIteratorTypeAtTimestamp
+    shardIteratorTypeSequenceNumber := kinesis.ShardIteratorTypeAfterSequenceNumber
+
+    timestamp := time.Now()
+    timestamp = timestamp.Add(-5 * time.Minute)
+    shardIteratorInput := &amp;amp;kinesis.GetShardIteratorInput{
+        ShardId:           shard.ShardId,
+        StreamName:        streamName,
+        ShardIteratorType: &amp;amp;shardIteratorTypeTimestamp,
+        Timestamp:         &amp;amp;timestamp,
+    }
+
+    shardIteratorOutput, err := kinesisService.GetShardIterator(shardIteratorInput)
+    if err != nil {
+        return
+    }
+
+    query := fmt.Sprintf(&quot;INSERT INTO kinesis_test (name, description, id, server_timestamp) VALUES&quot;)
+
+    queryValues := []string{}
+    sequenceNumber := shard.SequenceNumberRange.StartingSequenceNumber
+    limitGetRecords := int64(2)
+    for {
+        kinesisInput := &amp;amp;kinesis.GetRecordsInput{
+            Limit:         &amp;amp;limitGetRecords,
+            ShardIterator: shardIteratorOutput.ShardIterator,
+        }
+
+        recordsOutput, err := kinesisService.GetRecords(kinesisInput)
+        if err != nil {
+            log.Printf(&quot;ShardID %s, GetRecords err: %v\n&quot;, *shard.ShardId, err)
+            return
+        }
+
+        if len(recordsOutput.Records) &amp;gt; 0 {
+            for _, d := range recordsOutput.Records {
+                var fakeEntity FakeEntity
+
+                err := json.Unmarshal(d.Data, &amp;amp;fakeEntity)
+                if err != nil {
+                    log.Printf(&quot;GetRecords Unmarshal err: %v\n&quot;, err)
+                    return
+                }
+
+                queryValues = append(queryValues, fmt.Sprintf(&quot;('%s', '%s', %d, '%s')&quot;, fakeEntity.Name, fakeEntity.Description, fakeEntity.ID, time.Now().UTC().Format(&quot;2006-01-02T15:04:05-0700&quot;)))
+                sequenceNumber = d.SequenceNumber
+            }
+        } else {
+            break
+        }
+
+        shardIteratorInput.StartingSequenceNumber = sequenceNumber
+        shardIteratorInput.ShardIteratorType = &amp;amp;shardIteratorTypeSequenceNumber
+        shardIteratorOutput, err = kinesisService.GetShardIterator(shardIteratorInput)
+        if err != nil {
+            log.Printf(&quot;ShardID %s, GetShardIterator err: %v\n&quot;, *shard.ShardId, err)
+            return
+        }
+    }
+
+    var insetsStatement string
+    for i := 1; i &amp;lt; len(queryValues); i++ {
+        if i == 1 {
+            insetsStatement = queryValues[i-1]
+        }
+        insetsStatement = fmt.Sprintf(&quot;%s, %s&quot;, insetsStatement, queryValues[i])
+    }
+
+    query = fmt.Sprintf(&quot;%s %s;&quot;, query, insetsStatement)
+    _, err = redshift.Exec(query)
+    if err != nil {
+        return
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Gist with publisher code: &lt;a href=&quot;https://gist.github.com/coboshm/1c89bcc7bf2c9f9694e4984051474951&quot;&gt;Github gist with examples&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 26 Aug 2017 10:43:59 +0200</pubDate>
+        <link>https://www.mcobos.com/golang/2017/08/26/kinesis-golang-redshift.html</link>
+        <guid isPermaLink="true">https://www.mcobos.com/golang/2017/08/26/kinesis-golang-redshift.html</guid>
+        
+        <category>golang</category>
+        
+        <category>kinesis</category>
+        
+        <category>redshift</category>
+        
+        <category>aws</category>
+        
+        
+        <category>Golang</category>
+        
+      </item>
     
       <item>
         <title>Logging our golang app using rsyslog + logstash + kibana</title>
