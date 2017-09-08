@@ -4,10 +4,10 @@
     <title>Marc Cobos</title>
     <description>Marc Cobos, Software Engineer, Sports and travel addict blog.
 </description>
-    <link>https://www.mcobos.com/</link>
-    <atom:link href="https://www.mcobos.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 26 Aug 2017 18:49:13 +0200</pubDate>
-    <lastBuildDate>Sat, 26 Aug 2017 18:49:13 +0200</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 08 Sep 2017 14:55:15 +0200</pubDate>
+    <lastBuildDate>Fri, 08 Sep 2017 14:55:15 +0200</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
     
       <item>
@@ -174,8 +174,8 @@ wg.Wait()
 
 </description>
         <pubDate>Sat, 26 Aug 2017 10:43:59 +0200</pubDate>
-        <link>https://www.mcobos.com/golang/2017/08/26/kinesis-golang-redshift.html</link>
-        <guid isPermaLink="true">https://www.mcobos.com/golang/2017/08/26/kinesis-golang-redshift.html</guid>
+        <link>http://localhost:4000/golang/2017/08/26/kinesis-golang-redshift.html</link>
+        <guid isPermaLink="true">http://localhost:4000/golang/2017/08/26/kinesis-golang-redshift.html</guid>
         
         <category>golang</category>
         
@@ -289,8 +289,8 @@ input(type=&quot;imudp&quot; port=&quot;514&quot; ruleset=&quot;remoteAllJsonLog
 
 </description>
         <pubDate>Sat, 19 Aug 2017 10:43:59 +0200</pubDate>
-        <link>https://www.mcobos.com/golang/2017/08/19/rsyslog-logstash-kibana-golang.html</link>
-        <guid isPermaLink="true">https://www.mcobos.com/golang/2017/08/19/rsyslog-logstash-kibana-golang.html</guid>
+        <link>http://localhost:4000/golang/2017/08/19/rsyslog-logstash-kibana-golang.html</link>
+        <guid isPermaLink="true">http://localhost:4000/golang/2017/08/19/rsyslog-logstash-kibana-golang.html</guid>
         
         <category>golang</category>
         
@@ -332,8 +332,8 @@ From here I take many great moments, a lot of learning and many friends. I am su
 &lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 12 Jan 2017 01:00:00 +0100</pubDate>
-        <link>https://www.mcobos.com/general/2017/01/12/bye-trovit.html</link>
-        <guid isPermaLink="true">https://www.mcobos.com/general/2017/01/12/bye-trovit.html</guid>
+        <link>http://localhost:4000/general/2017/01/12/bye-trovit.html</link>
+        <guid isPermaLink="true">http://localhost:4000/general/2017/01/12/bye-trovit.html</guid>
         
         <category>trovit</category>
         
@@ -384,8 +384,8 @@ php /Users/mcobos/ProjectName/vendor/bin/phpunit -c /Users/mcobos/ProjectName/bu
 
 </description>
         <pubDate>Wed, 12 Oct 2016 12:43:59 +0200</pubDate>
-        <link>https://www.mcobos.com/php/2016/10/12/bgphp16.html</link>
-        <guid isPermaLink="true">https://www.mcobos.com/php/2016/10/12/bgphp16.html</guid>
+        <link>http://localhost:4000/php/2016/10/12/bgphp16.html</link>
+        <guid isPermaLink="true">http://localhost:4000/php/2016/10/12/bgphp16.html</guid>
         
         <category>php</category>
         
@@ -414,8 +414,8 @@ php /Users/mcobos/ProjectName/vendor/bin/phpunit -c /Users/mcobos/ProjectName/bu
 
 </description>
         <pubDate>Wed, 05 Oct 2016 10:43:59 +0200</pubDate>
-        <link>https://www.mcobos.com/jekyll/2016/10/05/welcome-to-my-blog-done-using-jekyll-copy.html</link>
-        <guid isPermaLink="true">https://www.mcobos.com/jekyll/2016/10/05/welcome-to-my-blog-done-using-jekyll-copy.html</guid>
+        <link>http://localhost:4000/jekyll/2016/10/05/welcome-to-my-blog-done-using-jekyll-copy.html</link>
+        <guid isPermaLink="true">http://localhost:4000/jekyll/2016/10/05/welcome-to-my-blog-done-using-jekyll-copy.html</guid>
         
         <category>jekyll</category>
         

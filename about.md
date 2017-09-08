@@ -16,11 +16,17 @@ cover:  "/assets/instacode.png"
   </div>
 </div>
 <br/>
-I’m currently having fun at <a href="trovit.com" target="_blank">Trovit</a> as Software Developer,  I’m interested in everything that is related to clean code, software craftsmanship, web, devops and mobile applications. 
+I’m currently having fun at <a href="lernin.com" target="_blank">Lernin Games</a> as Software Developer (Ex Trovit, Ex ExoClick),  I’m interested in everything that is related to clean code, software craftsmanship, web, devops and mobile applications. 
 
-I always wonder why things work the way they do, why we keep doing them the same way over and over instead of push them to the next level. I'm a Software Engineer focused in developing applications with PHP, NodeJS, Java, Ajax, JQuery, CSS, Mysql, Python, MongoDB and others...
+I always wonder why things work the way they do, why we keep doing them the same way over and over instead of push them to the next level. I'm a Software Engineer focused in developing applications with Golang, AWS SDK, Terraform, PHP, NodeJS, Java, Ajax, JQuery, CSS, Mysql, Python, MongoDB and others...
 
 ### Also experience with:
+- Golang 
+<br/>
+- Terraform
+<br/>
+- AWS Prodcuts (EC2, ELB, Security Groups, Redshift, RDS, SNS, CodeDeploy, CodePipeline, and others)
+<br/>
 - DDD Domain Driven Design, Design Patterns
 <br/>
 - PHP Frameworks: Symfony, Silex, Zend
@@ -55,8 +61,6 @@ I love to attend all kind of meetups and conferences to learn from another profe
 Also you can see my github: <a href="http://github.com/coboshm" target="_blank">http://github.com/coboshm</a>
 
 <img src="{{ site.baseurl }}/assets/zend_certified.jpg" title="Zend Certified" class="image_certified">
-
-And currently learning Ruby on rails.
 
 ### I just love my job.
 
