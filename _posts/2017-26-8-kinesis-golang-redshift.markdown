@@ -9,8 +9,8 @@ cover:  "/assets/instacode.png"
 thumbnail: "/assets/golang.png"
 ---
 
-Track how the user uses our app is one of the basic things that all company should do.
-It's possible to track everything you can imagine.
+Track how the user uses our app/web/product is one of the basic things that all company should do.
+It's possible to track everything you can imagine. Data driven Companies uses this data to improve their products and launch new features.
 
 Some examples:
 1. `App has been started`
@@ -20,10 +20,12 @@ Some examples:
 
 ...
 
-Data driven Companies uses this data to improve their products and launch new features.
+In my current job we would like to develop a real time tracking system to track all the events that the product people wants to check to make the best product decisions. I was thinking to do it using Go because it is fast, concurrent and easy to understant and learn. As we are using AWS we decided to investigate a little bit if we can use Kinesis and Redshift instead of Kafka and Hive. And this is a small script that we did to check if our tracking system can be done using this technologies.
 
-### Tracking our app using Kinesis + Redshift + Golang
-Kinesis with one stream (or more if you want) + Golang to put data into the stream and consume this data and store to redshift.
+Kinesis is used to collect and process large streams of data records in real time. And Redshift is a fully managed, petabyte-scale data warehouse service in the cloud.
+
+### Kinesis + Redshift + Golang
+For this test we are going to use a Kinesis with one stream + Golang to put data into the stream and consume this data to persist it in Redshift.
 
 <a href="{{ site.baseurl }}/assets/kinesis.png" data-lightbox="Kinesis" data-title="Kinesis">
   <img style="width: 100%; margin:auto;" src="{{ site.baseurl }}/assets/kinesis.png" class="rounded_big" title="Kinesis">
@@ -165,8 +167,20 @@ func getRecordsFromShard(kinesisService *kinesis.Kinesis, streamName *string, sh
 }
 ```
 
+After to execute this script we saw that we are able to use this technologies to develop our tracking system.
+
 Gist with publisher code: [Github gist with examples][github gist]
 
+
+#### Updated Agust 2018:
+After some time with our tracking system using Kinesis, Redshift and Go we can say that our tracking system is working perfect with more than 400k users and more that 1TB of events stored in real time with almost no problems.
+
+Here you can see the num of events processed by our system each minute.
+
+
+<a href="{{ site.baseurl }}/assets/tracking_kinesis.png" data-lightbox="Kinesis" data-title="Kinesis">
+  <img style="width: 100%; margin:auto;" src="{{ site.baseurl }}/assets/tracking_kinesis.png" title="Kinesis">
+</a>
 
 [github gist]: https://gist.github.com/coboshm/1c89bcc7bf2c9f9694e4984051474951
 [github gist consumer]: https://gist.github.com/coboshm/1c89bcc7bf2c9f9694e4984051474951
